@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('./loggerMiddleware')
 const cors = require('cors')
+
 const app = express()
 
 app.use(cors())
@@ -80,8 +81,7 @@ app.post('/api/persons/', (request, response) => {
 })
 
 const generateId = () => {
-  const maxId =
-    persons.length > 0 ? Math.max(...persons.map((person) => person.id)) : 0
+  const maxId = persons.length > 0 ? Math.max(...persons.map((person) => person.id)) : 0
   return maxId + 1
 }
 
