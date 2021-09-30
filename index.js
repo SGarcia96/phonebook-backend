@@ -1,9 +1,10 @@
 require('dotenv').config()
+require('./mongo')
 
 const express = require('express')
 const logger = require('./loggerMiddleware')
 const cors = require('cors')
-
+const Person = require('./models/Person')
 const app = express()
 
 app.use(cors())
@@ -12,30 +13,32 @@ app.use(logger)
 app.use(express.static('build'))
 
 let persons = [
-  {
-    id: 1,
-    name: 'Arto Hellas',
-    number: '040-123456'
-  },
-  {
-    id: 2,
-    name: 'Ada Lovelace',
-    number: '39-44-5323523'
-  },
-  {
-    id: 3,
-    name: 'Dan Abramov',
-    number: '12-43-234345'
-  },
-  {
-    id: 4,
-    name: 'Mary Poppendieck',
-    number: '39-23-6423122'
-  }
+  // {
+  //   id: 1,
+  //   name: 'Arto Hellas',
+  //   number: '040-123456'
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Ada Lovelace',
+  //   number: '39-44-5323523'
+  // },
+  // {
+  //   id: 3,
+  //   name: 'Dan Abramov',
+  //   number: '12-43-234345'
+  // },
+  // {
+  //   id: 4,
+  //   name: 'Mary Poppendieck',
+  //   number: '39-23-6423122'
+  // }
 ]
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person.find({}).then(persons => {
+    response.json(persons)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
