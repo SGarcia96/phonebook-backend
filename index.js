@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const logger = require('./loggerMiddleware')
 const cors = require('cors')
@@ -91,7 +93,7 @@ const generateInfo = () => {
           ${new Date()}`
 }
 
-const PORT = process.env.PORT || 3002
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
